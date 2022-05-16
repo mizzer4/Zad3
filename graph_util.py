@@ -28,7 +28,11 @@ def create_edges_all(n):
 
 def edges_densify(n, edges, density):
     max_num_edges = (n*n - n)/2
+    min_num_edges = n
     required_num_edges = math.floor(max_num_edges * (density/100))
+    
+    if min_num_edges > required_num_edges:
+        required_num_edges = min_num_edges 
 
     while len(edges) > required_num_edges:
         vertices = [random.randint(0, n-1) for i in range(3)]
@@ -78,6 +82,9 @@ def euler_graph(n, edges):
     return True
 
 def path_toString(path):
+    if type(path) != '<class \'str\'>' or path == None:
+        return "None"
+
     path_string = [str(v) for v in path]
 
     return " -> ".join(path_string)
